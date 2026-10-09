@@ -17,7 +17,7 @@ const STEPS = [
   {
     eyebrow: 'THE METHOD',
     title: 'Four layers turn audience data into posting times.',
-    body: 'Scroll to assemble the engine — bottom to top, one layer at a time. Every recommendation Post Peak makes comes out of this stack.',
+    body: 'Scroll to assemble the engine from bottom to top, one layer at a time. Every recommendation Post Peak makes comes out of this stack.',
   },
   {
     eyebrow: 'LAYER 01 — AUDIENCE SIGNALS',
@@ -42,7 +42,7 @@ const STEPS = [
   {
     eyebrow: 'CONNECTED OUTPUTS',
     title: 'Everything reads from one core.',
-    body: 'Dashboards, schedules, and post cards all connect to the same model. Change one input and every layer re-computes together — no stale reports, no manual re-runs.',
+    body: 'Dashboards, schedules, and post cards all connect to the same model. Change one input and every layer re-computes together.',
   },
   {
     eyebrow: 'READY WHEN YOU ARE',
@@ -57,9 +57,8 @@ const PHASE_STOPS = [0, 0.08, 0.23, 0.38, 0.53, 0.72, 0.97];
 
 const BENEFITS = [
   {
-    label: 'MINUTE-LEVEL',
     title: 'Precision by the minute',
-    body: 'Reach curves at one-minute resolution — not hour-of-day guesses.',
+    body: 'Reach curves at one-minute resolution',
   },
   {
     label: 'MULTI-LOCATION',
@@ -190,10 +189,6 @@ export default function Landing() {
       <header ref={heroRef} className="lp-hero">
         <p className="lp-eyebrow">POST PEAK · POSTING-TIME INTELLIGENCE</p>
         <h1 className="lp-headline">Post when the algorithm is watching.</h1>
-        <p className="lp-subhead">
-          Post Peak models your audience&rsquo;s reach minute by minute &mdash; then picks the exact
-          posting times that catch the most people, on every platform, in every timezone.
-        </p>
         <PeakMark size={96} className="lp-hero-symbol" />
         <div className="lp-cta-row">
           <Link to="/app" className="lp-btn lp-btn-primary lp-btn-lg">
@@ -253,8 +248,8 @@ export default function Landing() {
       {/* Benefits */}
       <section className="lp-benefits">
         {BENEFITS.map(b => (
-          <article key={b.label} className="lp-benefit pp-glass">
-            <p className="lp-eyebrow">{b.label}</p>
+          <article key={b.title} className="lp-benefit pp-glass">
+            {b.label && <p className="lp-eyebrow">{b.label}</p>}
             <h3 className="lp-benefit-title">{b.title}</h3>
             <p className="lp-benefit-body">{b.body}</p>
           </article>
