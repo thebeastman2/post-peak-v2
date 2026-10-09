@@ -1,0 +1,22 @@
+{
+  "name": "SavedInput",
+  "type": "object",
+  "properties": {
+    "session_id": {
+      "type": "string",
+      "description": "Anonymous session identifier stored in the user's browser"
+    },
+    "input_data": {
+      "type": "string",
+      "description": "JSON string of the full input configuration"
+    },
+    "platform": {
+      "type": "string",
+      "description": "Which platform was selected"
+    }
+  },
+  "required": [
+    "session_id",
+    "input_data"
+  ]
+}

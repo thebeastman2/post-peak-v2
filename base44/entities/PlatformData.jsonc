@@ -1,0 +1,27 @@
+{
+  "name": "PlatformData",
+  "type": "object",
+  "properties": {
+    "platform_id": {
+      "type": "string",
+      "description": "Platform identifier (instagram, tiktok, snapchat, youtube, facebook)"
+    },
+    "activity_peaks": {
+      "type": "string",
+      "description": "JSON: age group id -> array of {h, w, s} Gaussian activity peaks"
+    },
+    "day_multipliers": {
+      "type": "string",
+      "description": "JSON: day name (monday..sunday) -> multiplier (0.8-1.2)"
+    },
+    "source_note": {
+      "type": "string",
+      "description": "Brief note on what the AI sourced and when"
+    }
+  },
+  "required": [
+    "platform_id",
+    "activity_peaks",
+    "day_multipliers"
+  ]
+}

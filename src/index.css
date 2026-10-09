@@ -1,0 +1,863 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 3.9%;
+    --primary: 0 0% 9%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 0 0% 96.1%;
+    --secondary-foreground: 0 0% 9%;
+    --muted: 0 0% 96.1%;
+    --muted-foreground: 0 0% 45.1%;
+    --accent: 0 0% 96.1%;
+    --accent-foreground: 0 0% 9%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 89.8%;
+    --input: 0 0% 89.8%;
+    --ring: 0 0% 3.9%;
+    --chart-1: 12 76% 61%;
+    --chart-2: 173 58% 39%;
+    --chart-3: 197 37% 24%;
+    --chart-4: 43 74% 66%;
+    --chart-5: 27 87% 67%;
+    --radius: 0.625rem;
+    --font-heading: 'IBM Plex Sans', 'Inter', ui-sans-serif, system-ui, sans-serif;
+    --font-body: 'Inter', 'IBM Plex Sans', ui-sans-serif, system-ui, sans-serif;
+    --font-display: 'IBM Plex Sans', 'Inter', ui-sans-serif, system-ui, sans-serif;
+    --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  /* Post Peak default color scheme (Black — sleek monochrome) */
+  --pp-primary: 0 0% 9%;
+  --pp-accent: 0 0% 40%;
+  --pp-bg: 0 0% 97%;
+  --pp-card: 0 0% 100%;
+  --pp-text: 0 0% 12%;
+  --pp-text-muted: 0 0% 52%;
+  --pp-border: 0 0% 90%;
+  }
+
+  .dark {
+    --background: 0 0% 3.9%;
+    --foreground: 0 0% 98%;
+    --card: 0 0% 3.9%;
+    --card-foreground: 0 0% 98%;
+    --popover: 0 0% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 0 0% 98%;
+    --primary-foreground: 0 0% 9%;
+    --secondary: 0 0% 14.9%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 0 0% 14.9%;
+    --muted-foreground: 0 0% 63.9%;
+    --accent: 0 0% 14.9%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 14.9%;
+    --input: 0 0% 14.9%;
+    --ring: 0 0% 83.1%;
+    --chart-1: 220 70% 50%;
+    --chart-2: 160 60% 45%;
+    --chart-3: 30 80% 55%;
+    --chart-4: 280 65% 60%;
+    --chart-5: 340 75% 55%;
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  body {
+    @apply bg-background text-foreground font-body;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+}
+
+/* Post Peak color scheme classes */
+.pp-bg { background-color: hsl(var(--pp-bg)); }
+.pp-card { background-color: hsl(var(--pp-card)); }
+.pp-text { color: hsl(var(--pp-text)); }
+.pp-text-muted { color: hsl(var(--pp-text-muted)); }
+.pp-border { border-color: hsl(var(--pp-border)); }
+.pp-primary { color: hsl(var(--pp-primary)); }
+.pp-primary-bg { background-color: hsl(var(--pp-primary)); }
+.pp-accent { color: hsl(var(--pp-accent)); }
+.pp-accent-bg { background-color: hsl(var(--pp-accent)); }
+.pp-input {
+  background-color: hsl(var(--pp-card));
+  color: hsl(var(--pp-text));
+  border-color: hsl(var(--pp-border));
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+.pp-input:focus {
+  border-color: hsl(var(--pp-primary));
+  outline: none;
+  box-shadow: 0 0 0 3px hsl(var(--pp-primary) / 0.10);
+}
+.pp-hover { transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease; }
+.pp-hover:hover { background-color: hsl(var(--pp-bg)); }
+
+/* Refined range slider */
+.pp-range {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 4px;
+  border-radius: 9999px;
+  background: hsl(var(--pp-border));
+  outline: none;
+  cursor: pointer;
+}
+.pp-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 9999px;
+  background: hsl(var(--pp-primary));
+  border: 2px solid hsl(var(--pp-card));
+  box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+  transition: transform 0.15s ease;
+}
+.pp-range::-webkit-slider-thumb:hover { transform: scale(1.12); }
+.pp-range::-moz-range-thumb {
+  width: 16px; height: 16px; border-radius: 9999px;
+  background: hsl(var(--pp-primary)); cursor: pointer;
+  border: 2px solid hsl(var(--pp-card));
+  box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+}
+.pp-range::-moz-range-track { height: 4px; border-radius: 9999px; background: hsl(var(--pp-border)); }
+
+/* Legacy gradient helpers (kept for compatibility) */
+.pp-grad { background: linear-gradient(135deg, hsl(var(--pp-primary)), hsl(var(--pp-accent))); }
+.pp-grad-text { background: linear-gradient(135deg, hsl(var(--pp-primary)), hsl(var(--pp-accent))); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+
+/* ── Cinematic 3D / glass layer ── */
+.pp-glass {
+  background-color: hsl(var(--pp-card) / 0.66);
+  backdrop-filter: blur(16px) saturate(150%);
+  -webkit-backdrop-filter: blur(16px) saturate(150%);
+  border: 1px solid hsl(var(--pp-border) / 0.75);
+  box-shadow:
+    0 1px 0 0 hsl(var(--pp-card) / 0.5) inset,
+    0 0 0 1px hsl(var(--pp-primary) / 0.04) inset,
+    0 18px 44px -22px hsl(var(--pp-primary) / 0.22),
+    0 6px 18px -10px rgba(0,0,0,0.16);
+}
+.pp-edge {
+  box-shadow: 0 1px 0 0 hsl(var(--pp-card) / 0.7) inset;
+  background: linear-gradient(180deg, hsl(var(--pp-card) / 0.45), transparent 38%);
+  opacity: 0.6;
+}
+.pp-grid {
+  background-image:
+    linear-gradient(to right, hsl(var(--pp-primary) / 0.6) 1px, transparent 1px),
+    linear-gradient(to bottom, hsl(var(--pp-primary) / 0.6) 1px, transparent 1px);
+  background-size: 48px 48px;
+  transform: perspective(620px) rotateX(58deg) scale(2.2);
+  transform-origin: center 82%;
+  -webkit-mask-image: radial-gradient(ellipse 70% 60% at center 72%, #000 8%, transparent 76%);
+  mask-image: radial-gradient(ellipse 70% 60% at center 72%, #000 8%, transparent 76%);
+}
+@keyframes pp-float {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(2%, -3%) scale(1.06); }
+}
+@keyframes pp-float2 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(-3%, 2%) scale(1.08); }
+}
+.pp-blob-a { animation: pp-float 18s ease-in-out infinite; }
+.pp-blob-b { animation: pp-float2 22s ease-in-out infinite; }
+
+.pp-btn-glow {
+  box-shadow: 0 12px 32px -14px hsl(var(--pp-primary) / 0.55), 0 0 0 1px hsl(var(--pp-primary) / 0.06) inset;
+  transition: box-shadow 0.25s ease, transform 0.2s ease;
+}
+.pp-btn-glow:hover { box-shadow: 0 16px 40px -10px hsl(var(--pp-primary) / 0.7), 0 0 0 1px hsl(var(--pp-primary) / 0.12) inset; }
+.pp-btn-glow:active { transform: translateY(1px) scale(0.99); }
+
+/* Clip horizontal overflow without creating a scroll container, which would
+   disable viewport-sticky navigation and the landing-page build stage. */
+html, body { overflow-x: clip; max-width: 100%; }
+
+@media (prefers-reduced-motion: reduce) {
+  .pp-blob-a, .pp-blob-b { animation: none; }
+}
+
+/* ── Ring loader (car-on-track spinner) ── */
+.ring-loader {
+  --uib-color: currentColor;
+  --uib-speed: 1.4s;
+  --uib-bg-opacity: 0.1;
+  transform-origin: center;
+  overflow: visible;
+}
+.ring-loader .track {
+  stroke: var(--uib-color);
+  opacity: var(--uib-bg-opacity);
+  transition: stroke 0.5s ease;
+}
+.ring-loader .car {
+  fill: none;
+  stroke: var(--uib-color);
+  stroke-dasharray: 15, 85;
+  stroke-dashoffset: 0;
+  stroke-linecap: round;
+  animation: ring-loader-travel var(--uib-speed) linear infinite;
+  will-change: stroke-dasharray, stroke-dashoffset;
+  transition: stroke 0.5s ease;
+}
+@keyframes ring-loader-travel {
+  0% { stroke-dashoffset: 0; }
+  100% { stroke-dashoffset: -100; }
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   Landing page (dark theme, scroll-built isometric diagram)
+   ══════════════════════════════════════════════════════════════════════ */
+/* The landing backdrop is a fixed, negative-z layer, which paints *behind*
+   body's background box. Giving the root a color stops body's background from
+   being propagated to the canvas (which is what normally keeps that layer
+   visible on the calculator), so body has to go transparent here — otherwise
+   its white background covers the backdrop. Root color also gives over-scroll
+   the right shade instead of a white flash. */
+html:has(.lp) { background-color: #0b0d10; }
+html:has(.lp) body { background-color: transparent; }
+
+.lp {
+  --lp-bg: #0b0d10;
+  --lp-bg-2: #101419;
+  --lp-line: #8b98a1;
+  --lp-line-dim: #2c363d;
+  --lp-text: #f2f5f7;
+  --lp-muted: #97a3ac;
+  --lp-accent: #e76e50;
+  --lp-accent-soft: rgba(231, 110, 80, 0.16);
+
+  /* Feed the calculator's design tokens from this palette (values mirror the
+     --lp-* tokens above, as HSL triplets). AmbientBackground, ParticleField
+     and the pp-* helpers all read these, so the calculator's perspective grid,
+     particles and glass surfaces render here in the landing's colors. */
+  --pp-bg: 220 19% 5%;
+  --pp-card: 213 22% 8%;
+  --pp-text: 200 27% 96%;
+  --pp-text-muted: 202 12% 63%;
+  --pp-border: 204 13% 20%;
+  --pp-primary: 12 76% 61%;
+  --pp-accent: 22 84% 62%;
+
+  /* Deliberately no background: AmbientBackground's fixed layer paints the
+     page, and a background here would cover it. */
+  color: var(--lp-text);
+  font-family: var(--font-body);
+  overflow-x: clip;
+}
+
+.lp-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--lp-accent);
+}
+
+.lp-headline {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(2.5rem, 6vw, 4.75rem);
+  line-height: 1.02;
+  letter-spacing: -0.025em;
+  margin: 1.1rem 0 0;
+}
+.lp-headline-sm { font-size: clamp(2rem, 4.5vw, 3.25rem); }
+
+.lp-subhead {
+  color: var(--lp-muted);
+  font-size: clamp(1rem, 1.6vw, 1.15rem);
+  line-height: 1.65;
+  max-width: 46rem;
+  margin: 1.25rem 0 0;
+}
+
+/* Nav */
+.lp-nav {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.9rem clamp(1.25rem, 4vw, 3rem);
+  background: hsl(var(--pp-bg) / 0.78);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--lp-line-dim);
+}
+.lp-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  color: var(--lp-text);
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.05rem;
+  letter-spacing: -0.01em;
+  text-decoration: none;
+}
+/* Layout only: PeakMark owns the stroke (fill, stroke, width, joins). */
+.lp-brand-mark {
+  display: block;
+  flex: 0 0 auto;
+}
+.lp-hero-symbol {
+  display: block;
+  margin: 1.5rem 0 0;
+  color: var(--lp-accent);
+  fill: none;
+  opacity: 0.9;
+}
+.lp-hero-symbol--offset {
+  margin: 1.75rem auto 0;
+  opacity: 0.55;
+  animation: lp-rise 0.7s ease 0.22s both;
+}
+
+/* Buttons */
+.lp-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.65rem 1.15rem;
+  border-radius: 10px;
+  font-size: 0.92rem;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform 0.18s ease, background-color 0.18s ease, border-color 0.18s ease, color 0.18s ease;
+}
+.lp-btn:active { transform: translateY(1px) scale(0.99); }
+.lp-btn-primary {
+  background: var(--lp-accent);
+  color: #150a07;
+  border: 1px solid transparent;
+}
+.lp-btn-primary:hover { background: #f0815f; }
+.lp-btn-ghost {
+  background: transparent;
+  color: var(--lp-text);
+  border: 1px solid var(--lp-line-dim);
+}
+.lp-btn-ghost:hover { border-color: var(--lp-accent); color: var(--lp-accent); }
+.lp-btn-lg { padding: 0.85rem 1.5rem; font-size: 1rem; border-radius: 12px; }
+
+/* Hero */
+.lp-hero {
+  padding: clamp(3rem, 6vh, 4.5rem) clamp(1.25rem, 4vw, 3rem) clamp(2.5rem, 5.5vh, 4rem);
+  max-width: 80rem;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+.lp-hero .lp-eyebrow { animation: lp-rise 0.7s ease both; }
+.lp-hero .lp-headline { animation: lp-rise 0.7s ease 0.08s both; }
+.lp-hero .lp-subhead { animation: lp-rise 0.7s ease 0.18s both; }
+.lp-hero-symbol { animation: lp-rise 0.7s ease 0.12s both; }
+.lp-cta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+  margin-top: 2.1rem;
+  animation: lp-rise 0.7s ease 0.28s both;
+  justify-content: center;
+}
+@keyframes lp-rise {
+  from { opacity: 0; transform: translateY(22px); }
+  to { opacity: 1; transform: none; }
+}
+
+/* Build section + sticky stage */
+.lp-build {
+  --lp-build-height: 600vh;
+  height: var(--lp-build-height);
+  position: relative;
+  padding-top: clamp(3rem, 7vh, 5rem);
+  display: block;
+}
+
+/* Two-column scroll-telling grid: step text on the left, sticky isometric
+   diagram on the right. Stacks to a single column on narrow screens. */
+.lp-build-grid {
+  position: relative;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(2rem, 4vw, 4rem);
+  align-items: stretch;
+}
+@media (min-width: 1024px) {
+  .lp-build-grid {
+    grid-template-columns: minmax(22rem, 36rem) 1fr;
+    gap: clamp(2rem, 5vw, 6rem);
+  }
+}
+
+/* Text column is tall (fills the section) so the absolutely-positioned step
+   panels align with the section's scroll progress. */
+.lp-text-col {
+  position: relative;
+  height: 100%;
+  min-height: 0;
+}
+
+.lp-stage {
+  --lp-sticky-top: 5.5rem;
+  position: sticky;
+  top: var(--lp-sticky-top);
+  height: calc(100vh - var(--lp-sticky-top));
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(1.5rem, 4vh, 3rem);
+  overflow: hidden;
+}
+.lp-stage.is-built {
+  position: sticky;
+  top: var(--lp-sticky-top);
+  height: calc(100vh - var(--lp-sticky-top));
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(1.5rem, 4vh, 3rem);
+}
+
+.lp-diagram-col {
+  position: relative;
+  height: 100%;
+  min-height: 0;
+  display: flex;
+  align-items: flex-start;
+}
+
+.lp-diagram {
+  width: 100%;
+  max-width: 82rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  will-change: transform;
+  transform: translateY(calc(0px - var(--release-shift, 0px)));
+}
+.iso-svg {
+  width: 100%;
+  height: auto;
+  display: block;
+  color: var(--lp-text);
+}
+.lp-diagram { min-width: 0; }
+.iso-svg { max-height: 88vh; }
+
+/* Step text panel: absolutely positioned in the text column, centered on
+   its phase-stop so each step's copy appears in the viewport as the user
+   reaches that stop and then scrolls up and away as they continue.
+   Only the active panel (i === phase) is shown; future panels (i > phase)
+   are hidden (opacity 0) so they never clutter the view. JS sets each
+   panel's `top` so its center lands on the phase-stop point, and sets
+   opacity by phase. A soft transition smooths the handoff. */
+.lp-step-panel {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 100vh;
+  transform: translateY(-50%);
+  z-index: 2;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  will-change: transform, opacity;
+}
+.lp-step-panel.is-active {
+  pointer-events: auto;
+  opacity: 1;
+}
+.lp-step-panel .lp-step {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.5rem;
+  align-items: flex-start;
+  padding: clamp(1.5rem, 4vh, 3.2rem) clamp(1.25rem, 4vw, 3rem);
+}
+@media (min-width: 1024px) {
+  .lp-step-panel .lp-step {
+    max-width: 30rem;
+    padding: clamp(3.5rem, 7vh, 6rem) clamp(1.25rem, 4vw, 3rem) clamp(3.5rem, 8vh, 6.5rem);
+  }
+}
+.lp-step-panel.is-active .lp-step-cta { pointer-events: auto; }
+
+.lp-step {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: flex-start;
+}
+.lp-step-title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(1.5rem, 2.6vw, 2.15rem);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+.lp-step-body {
+  color: var(--lp-muted);
+  font-size: 1rem;
+  line-height: 1.7;
+  margin: 0;
+}
+.lp-step-cta { margin-top: 1.3rem; }
+
+@media (max-width: 1023px) {
+  .lp-build-grid {
+    display: block;
+  }
+  .lp-text-col {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+  }
+  .lp-step-panel {
+    height: auto;
+    transform: translateY(-50%);
+    padding: 0 1.25rem;
+  }
+  .lp-step-panel .lp-step {
+    height: auto;
+    justify-content: flex-start;
+    padding: 0;
+    max-width: none;
+  }
+  .lp-diagram-col {
+    display: block;
+    height: 100%;
+  }
+  .lp-stage,
+  .lp-stage.is-built {
+    --lp-sticky-top: 5rem;
+    height: 42vh;
+    justify-content: flex-start;
+    padding: 0.75rem 1.25rem;
+  }
+  .lp-diagram { max-width: 100%; }
+}
+
+/* Progress rail */
+.lp-progress {
+  display: none;
+}
+.lp-progress-rail {
+  width: 100%;
+  height: 100%;
+  background: var(--lp-line-dim);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.lp-progress-fill {
+  width: 100%;
+  height: calc(var(--p, 0) * 100%);
+  background: var(--lp-accent);
+}
+
+/* ── Isometric diagram ── */
+.iso-face {
+  fill: rgba(139, 152, 161, 0.05);
+  stroke: rgba(139, 152, 161, 0.55);
+  stroke-width: 1.2;
+  transition: stroke 0.5s ease;
+}
+.iso-face-2 {
+  fill: rgba(139, 152, 161, 0.025);
+  stroke: rgba(139, 152, 161, 0.4);
+  stroke-width: 1;
+}
+.iso-grid line { stroke: rgba(139, 152, 161, 0.11); stroke-width: 1; }
+
+/* Slabs slide up into place; pieces reveal in staggered waves. */
+.iso-slab {
+  opacity: 0;
+  transform: translateY(26px);
+  transition: opacity 0.55s ease, transform 0.55s ease;
+}
+.iso-slab.is-on { opacity: 1; transform: none; }
+.iso-piece {
+  opacity: 0;
+  transform: translateY(9px);
+  transition: opacity 0.45s ease, transform 0.45s ease;
+}
+.iso-slab.is-on .iso-piece { opacity: 1; transform: none; }
+
+.iso-draw {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  transition: stroke-dashoffset 0.8s ease;
+}
+.iso-slab.is-on .iso-draw { stroke-dashoffset: 0; }
+.iso-inset {
+  fill: none;
+  stroke: rgba(231, 110, 80, 0.55);
+  stroke-width: 1.2;
+  opacity: 0;
+  transition: stroke-dashoffset 0.8s ease, opacity 0.45s ease;
+}
+.iso-window {
+  fill: rgba(231, 110, 80, 0.05);
+  stroke: rgba(231, 110, 80, 0.8);
+  stroke-width: 1.3;
+  opacity: 0;
+  transition: stroke-dashoffset 0.8s ease, opacity 0.45s ease;
+}
+.iso-slab.is-on .iso-inset, .iso-slab.is-on .iso-window { opacity: 1; }
+.iso-dot { fill: rgba(139, 152, 161, 0.8); }
+.iso-dot-ring { fill: none; stroke: rgba(139, 152, 161, 0.35); stroke-width: 1; }
+.iso-link { stroke: rgba(139, 152, 161, 0.5); stroke-width: 1.1; fill: none; }
+.iso-spark {
+  stroke: var(--lp-accent);
+  stroke-width: 1.6;
+  stroke-dasharray: 0.03 0.97;
+  stroke-linecap: round;
+  fill: none;
+  animation: iso-travel 3.2s linear infinite;
+}
+@keyframes iso-travel {
+  from { stroke-dashoffset: 0; }
+  to { stroke-dashoffset: -1; }
+}
+
+.iso-leader .iso-draw { stroke: rgba(139, 152, 161, 0.5); stroke-width: 1; fill: none; transition: stroke-dashoffset 0.9s ease 0.25s; }
+.iso-label-text {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  fill: var(--lp-muted);
+  opacity: 0;
+  transition: opacity 0.5s ease 0.75s;
+}
+.iso-slab.is-on .iso-label-text { opacity: 1; }
+
+/* Nodes */
+.iso-node {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.iso-slab.is-on .iso-node { opacity: 1; transform: none; }
+.iso-node-ring { fill: none; stroke: var(--lp-accent); stroke-width: 1.3; }
+.iso-node-core { fill: var(--lp-bg-2); stroke: rgba(139, 152, 161, 0.6); stroke-width: 1; }
+.iso-node-icon { color: var(--lp-text); }
+.iso-node-pulse {
+  fill: none;
+  stroke: var(--lp-accent);
+  stroke-width: 1.2;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: iso-pulse 2.6s ease-out infinite;
+}
+@keyframes iso-pulse {
+  0% { transform: scale(0.75); opacity: 0.9; }
+  70%, 100% { transform: scale(1.65); opacity: 0; }
+}
+.iso-tip { opacity: 0; pointer-events: none; transition: opacity 0.18s ease; }
+.iso-node:hover .iso-tip { opacity: 1; }
+.iso-tip rect { fill: var(--lp-bg-2); stroke: var(--lp-line-dim); stroke-width: 1; }
+.iso-tip-title { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; fill: var(--lp-text); }
+.iso-tip-desc { font-family: var(--font-body); font-size: 10px; fill: var(--lp-muted); }
+
+/* Floating cards + connectors */
+.iso-card {
+  opacity: 0;
+  transform: translateY(-22px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  cursor: default;
+}
+.iso-float.is-on .iso-card { opacity: 1; transform: none; }
+.iso-card .iso-face { fill: rgba(139, 152, 161, 0.06); transition: stroke 0.25s ease; }
+.iso-card.is-hot .iso-face { stroke: var(--lp-accent); }
+.iso-card-glyph { stroke: rgba(139, 152, 161, 0.85); stroke-width: 1.2; fill: none; }
+.iso-card-glyph-fill { fill: rgba(231, 110, 80, 0.18); stroke: rgba(231, 110, 80, 0.75); stroke-width: 1.1; }
+.iso-card-dot { fill: rgba(139, 152, 161, 0.85); }
+.iso-card-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  fill: var(--lp-muted);
+}
+.iso-connector {
+  stroke: rgba(139, 152, 161, 0.4);
+  stroke-width: 1;
+  fill: none;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  transition: stroke-dashoffset 0.9s ease, stroke 0.25s ease;
+}
+.iso-float.is-on .iso-connector { stroke-dashoffset: 0; }
+.iso-connector.is-hot { stroke: var(--lp-accent); stroke-width: 1.6; }
+
+/* Scrolling back up: collapse reveal delays so the build un-assembles together. */
+.iso-slab:not(.is-on) .iso-piece,
+.iso-slab:not(.is-on) .iso-node,
+.iso-slab:not(.is-on) .iso-draw,
+.iso-slab:not(.is-on) .iso-label-text,
+.iso-float:not(.is-on) .iso-card,
+.iso-float:not(.is-on) .iso-connector {
+  transition-delay: 0s !important;
+}
+
+/* Benefits */
+.lp-benefits {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.1rem;
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: clamp(3.5rem, 9vh, 6.5rem) clamp(1.25rem, 4vw, 3rem);
+}
+/* The card wears the calculator's glass surface (the `pp-glass` class on the
+   element), so this rule only owns spacing, radius and the hover accent — the
+   particle field stays visible through the panel. */
+.lp-benefit {
+  border-radius: 16px;
+  padding: 1.6rem 1.5rem;
+  transition: border-color 0.25s ease, transform 0.25s ease;
+}
+.lp-benefit:hover { border-color: hsl(var(--pp-primary)); transform: translateY(-3px); }
+.lp-benefit-title { font-family: var(--font-display); font-weight: 600; font-size: 1.25rem; margin: 0.85rem 0 0; }
+.lp-benefit-body { color: var(--lp-muted); line-height: 1.65; margin: 0.65rem 0 0; font-size: 0.95rem; }
+
+/* Final CTA */
+.lp-final {
+  text-align: center;
+  padding: clamp(4rem, 11vh, 8rem) clamp(1.25rem, 4vw, 3rem);
+  border-top: 1px solid var(--lp-line-dim);
+  border-bottom: 1px solid var(--lp-line-dim);
+  background: linear-gradient(180deg, hsl(var(--pp-card) / 0.62), hsl(var(--pp-bg) / 0.12));
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+.lp-final { text-align: center; }
+.lp-final .lp-subhead { margin-left: auto; margin-right: auto; }
+.lp-final .lp-btn { margin-top: 2rem; }
+
+/* Footer */
+.lp-footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem 2rem;
+  padding: 1.6rem clamp(1.25rem, 4vw, 3rem);
+  max-width: 78rem;
+  margin: 0 auto;
+}
+.lp-footer-note { color: var(--lp-muted); font-size: 0.85rem; margin: 0; }
+.lp-footer-link {
+  margin-left: auto;
+  color: var(--lp-text);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-bottom: 1px solid var(--lp-line-dim);
+  padding-bottom: 2px;
+}
+.lp-footer-link:hover { color: var(--lp-accent); border-color: var(--lp-accent); }
+
+/* Mobile: copy below diagram, shorter scroll, fit-to-width */
+@media (max-width: 860px) {
+  .lp-build { --lp-build-height: 350vh; }
+  .lp-build-grid { grid-template-columns: 1fr; }
+  .lp-step-panel { padding: 0 1.25rem; }
+  .lp-step-title { font-size: 1.35rem; }
+  .lp-step-body { font-size: 0.92rem; }
+  .lp-progress { display: none; }
+  .iso-svg { max-height: 40vh; }
+}
+
+/* Reduced motion: finished diagram, stacked copy, no animation */
+@media (prefers-reduced-motion: reduce) {
+  .lp-hero .lp-eyebrow, .lp-hero .lp-headline, .lp-hero .lp-subhead, .lp-cta-row {
+    animation: none;
+  }
+  .lp-build { --lp-build-height: auto; height: auto; padding: 3rem 0; }
+  .lp-build-grid { grid-template-columns: 1fr; align-items: flex-start; }
+  .lp-text-col { position: relative; height: auto; }
+  .lp-stage { position: static; height: auto; overflow: visible; transform: none !important; padding: 2.5rem clamp(1.25rem, 4vw, 3rem); }
+  .lp-diagram-col { position: relative; height: auto; }
+  .lp-diagram { order: -1; max-width: 54rem; }
+  .lp-progress { display: none; }
+  .lp-step-panel {
+    position: relative !important;
+    height: auto !important;
+    transform: none !important;
+    top: auto !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+  }
+  .lp-step-panel .lp-step {
+    height: auto !important;
+    justify-content: flex-start !important;
+    margin: 2.25rem auto 0;
+    max-width: 46rem;
+    padding: 0 1.25rem;
+  }
+  .lp-step {
+    opacity: 1 !important;
+  }
+  .iso-slab, .iso-piece, .iso-node, .iso-card, .iso-inset, .iso-window {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+  .iso-draw, .iso-connector { stroke-dashoffset: 0 !important; transition: none !important; }
+  .iso-label-text { opacity: 1 !important; transition: none !important; }
+  .iso-spark, .iso-node-pulse { animation: none !important; opacity: 0 !important; }
+}
