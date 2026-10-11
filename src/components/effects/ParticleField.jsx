@@ -26,11 +26,38 @@ export default function ParticleField({ colorKey, pointerRef, reduced }) {
     // (e.g. the landing page's own --pp-* block) colors the particles too.
     // On the calculator the canvas sits directly under :root, so this reads
     // exactly the same values it always has.
+    //
+    // The palette is mutable and re-resolved whenever the theme changes, rather
+    // than captured once. useColorScheme writes --pp-* from an effect on an
+    // ancestor component, and React flushes effects child-first, so this effect
+    // runs *before* that write lands: a one-shot read here always resolved the
+    // previously selected scheme, which left the particles a theme behind.
+    // colA/colB go through this object on every call, so refreshing it recolors
+    // the next frame without touching the particles or the running loop.
     const scope = canvas.parentElement || document.documentElement;
-    const primary = readVar('--pp-primary', scope);
-    const accent = readVar('--pp-accent', scope);
-    const colA = (a) => `hsla(${primary.h}, ${primary.s}%, ${primary.l}%, ${a})`;
-    const colB = (a) => `hsla(${accent.h}, ${accent.s}%, ${accent.l}%, ${a})`;
+    const palette = {
+      primary: readVar('--pp-primary', scope),
+      accent: readVar('--pp-accent', scope),
+    };
+    const refreshPalette = () => {
+      palette.primary = readVar('--pp-primary', scope);
+      palette.accent = readVar('--pp-accent', scope);
+    };
+    const colA = (a) => `hsla(${palette.primary.h}, ${palette.primary.s}%, ${palette.primary.l}%, ${a})`;
+    const colB = (a) => `hsla(${palette.accent.h}, ${palette.accent.s}%, ${palette.accent.l}%, ${a})`;
+
+    // Observe the themed elements instead of polling them: the theme hook
+    // mutates inline style on <html>, and the landing page scopes its palette
+    // to a .lp ancestor. Either way the mutation callback is a microtask, so it
+    // lands before the next paint and both a scheme change and a light/dark
+    // toggle recolor the very next frame.
+    const observer = new MutationObserver(refreshPalette);
+    for (const el of [document.documentElement, scope]) {
+      if (el) observer.observe(el, { attributes: true, attributeFilter: ['style', 'class'] });
+    }
+    // Safety net for the mount commit, in case the ancestor's effect is flushed
+    // after this frame is scheduled.
+    let syncRaf = requestAnimationFrame(() => { refreshPalette(); syncRaf = null; });
 
     const COUNT = window.innerWidth < 640 ? 60 : 110;
     const particles = [];
@@ -121,6 +148,8 @@ export default function ParticleField({ colorKey, pointerRef, reduced }) {
     raf = requestAnimationFrame(draw);
     return () => {
       cancelAnimationFrame(raf);
+      if (syncRaf) cancelAnimationFrame(syncRaf);
+      observer.disconnect();
       window.removeEventListener('resize', resize);
     };
   }, [colorKey, reduced, pointerRef]);

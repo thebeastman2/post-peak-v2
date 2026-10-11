@@ -261,8 +261,8 @@ html:has(.lp) body { background-color: transparent; }
   --lp-line-dim: #2c363d;
   --lp-text: #f2f5f7;
   --lp-muted: #97a3ac;
-  --lp-accent: #e76e50;
-  --lp-accent-soft: rgba(231, 110, 80, 0.16);
+  --lp-accent: #1ba778;
+  --lp-accent-soft: rgba(27, 167, 120, 0.16);
 
   /* Feed the calculator's design tokens from this palette (values mirror the
      --lp-* tokens above, as HSL triplets). AmbientBackground, ParticleField
@@ -273,8 +273,8 @@ html:has(.lp) body { background-color: transparent; }
   --pp-text: 200 27% 96%;
   --pp-text-muted: 202 12% 63%;
   --pp-border: 204 13% 20%;
-  --pp-primary: 12 76% 61%;
-  --pp-accent: 22 84% 62%;
+  --pp-primary: 160 72% 38%;
+  --pp-accent: 152 66% 42%;
 
   /* Deliberately no background: AmbientBackground's fixed layer paints the
      page, and a background here would cover it. */
@@ -368,10 +368,10 @@ html:has(.lp) body { background-color: transparent; }
 .lp-btn:active { transform: translateY(1px) scale(0.99); }
 .lp-btn-primary {
   background: var(--lp-accent);
-  color: #150a07;
+  color: #04160e;
   border: 1px solid transparent;
 }
-.lp-btn-primary:hover { background: #f0815f; }
+.lp-btn-primary:hover { background: #21ca91; }
 .lp-btn-ghost {
   background: transparent;
   color: var(--lp-text);
@@ -641,14 +641,14 @@ html:has(.lp) body { background-color: transparent; }
 .iso-slab.is-on .iso-draw { stroke-dashoffset: 0; }
 .iso-inset {
   fill: none;
-  stroke: rgba(231, 110, 80, 0.55);
+  stroke: rgba(27, 167, 120, 0.55);
   stroke-width: 1.2;
   opacity: 0;
   transition: stroke-dashoffset 0.8s ease, opacity 0.45s ease;
 }
 .iso-window {
-  fill: rgba(231, 110, 80, 0.05);
-  stroke: rgba(231, 110, 80, 0.8);
+  fill: rgba(27, 167, 120, 0.05);
+  stroke: rgba(27, 167, 120, 0.8);
   stroke-width: 1.3;
   opacity: 0;
   transition: stroke-dashoffset 0.8s ease, opacity 0.45s ease;
@@ -720,7 +720,7 @@ html:has(.lp) body { background-color: transparent; }
 .iso-card .iso-face { fill: rgba(139, 152, 161, 0.06); transition: stroke 0.25s ease; }
 .iso-card.is-hot .iso-face { stroke: var(--lp-accent); }
 .iso-card-glyph { stroke: rgba(139, 152, 161, 0.85); stroke-width: 1.2; fill: none; }
-.iso-card-glyph-fill { fill: rgba(231, 110, 80, 0.18); stroke: rgba(231, 110, 80, 0.75); stroke-width: 1.1; }
+.iso-card-glyph-fill { fill: rgba(27, 167, 120, 0.18); stroke: rgba(27, 167, 120, 0.75); stroke-width: 1.1; }
 .iso-card-dot { fill: rgba(139, 152, 161, 0.85); }
 .iso-card-label {
   font-family: var(--font-mono);
