@@ -771,16 +771,14 @@ html:has(.lp) body { background-color: transparent; }
 .lp-benefit-body { color: var(--lp-muted); line-height: 1.65; margin: 0.65rem 0 0; font-size: 0.95rem; }
 
 /* Final CTA */
+/* No surface of its own: AmbientBackground paints the page, so the particle
+   field reads here exactly as it does across the hero. An opaque panel plus a
+   backdrop blur would sit on top of it and hide it. */
 .lp-final {
   text-align: center;
   padding: clamp(4rem, 11vh, 8rem) clamp(1.25rem, 4vw, 3rem);
-  border-top: 1px solid var(--lp-line-dim);
   border-bottom: 1px solid var(--lp-line-dim);
-  background: linear-gradient(180deg, hsl(var(--pp-card) / 0.62), hsl(var(--pp-bg) / 0.12));
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
 }
-.lp-final { text-align: center; }
 .lp-final .lp-subhead { margin-left: auto; margin-right: auto; }
 .lp-final .lp-btn { margin-top: 2rem; }
 
